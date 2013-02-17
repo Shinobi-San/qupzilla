@@ -94,6 +94,7 @@ protected slots:
 
     // Context menu slots
     void openUrlInNewWindow();
+    void openUrlInNewPrivateBrowser();
     void sendLinkByMail();
     void copyLinkToClipboard();
     void downloadUrlToDisk();

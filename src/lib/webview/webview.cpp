@@ -458,6 +458,13 @@ void WebView::openUrlInNewWindow()
     }
 }
 
+void WebView::openUrlInNewPrivateBrowser()
+{
+    if (QAction* action = qobject_cast<QAction*>(sender())) {
+        mApp->startPrivateBrowsing(action->data().toUrl());
+    }
+}
+
 void WebView::sendLinkByMail()
 {
     if (QAction* action = qobject_cast<QAction*>(sender())) {
@@ -935,6 +942,7 @@ void WebView::createLinkContextMenu(QMenu* menu, const QWebHitTestResult &hitTes
     connect(act, SIGNAL(middleClicked()), this, SLOT(userDefinedOpenUrlInBgTab()));
     menu->addAction(act);
     menu->addAction(QIcon::fromTheme("window-new"), tr("Open link in new &window"), this, SLOT(openUrlInNewWindow()))->setData(hitTest.linkUrl());
+    menu->addAction(QIcon::fromTheme("window-new"), tr("Open link in new &private browser"), this, SLOT(openUrlInNewPrivateBrowser()))->setData(hitTest.linkUrl());
     menu->addSeparator();
     menu->addAction(qIconProvider->fromTheme("user-bookmarks"), tr("B&ookmark link"), this, SLOT(bookmarkLink()))->setData(hitTest.linkUrl());
     menu->addAction(QIcon::fromTheme("document-save"), tr("&Save link as..."), this, SLOT(downloadUrlToDisk()))->setData(hitTest.linkUrl());
